@@ -11,24 +11,15 @@ export default class App extends React.Component{
 		}
 	}
 
-	onChangeUsername = event =>{
+	onChange = event =>{
 		this.setState({
-			username: event.target.value
-		})
-	};
-	onChangePassword = event =>{
-		this.setState({
-			password: event.target.value
-		})
-	};
-	onChangeRepeatPassword = event =>{
-		this.setState({
-			repeatPassword: event.target.value
+			[event.target.name]: event.target.value
 		})
 	};
 
 	onSubmit = event =>{
 		event.preventDefault();
+		//console.log(this);
 		// console.log("refs", this.username.value, this.password.value);
 		console.log("state", this.state);
 	};
@@ -45,7 +36,8 @@ export default class App extends React.Component{
 							placeholder="Enter username"
 							ref={node => {(this.username = node)}}
 							value={this.state.username}
-							onChange={this.onChangeUsername}
+							name="username"
+							onChange={this.onChange}
 						/>
 					</div>
 					<div className="form-group">
@@ -56,7 +48,8 @@ export default class App extends React.Component{
 							placeholder="Enter password"
 							ref={node => {(this.password = node)}}
 							value={this.state.password}
-							onChange={this.onChangePassword}
+							name="password"
+							onChange={this.onChange}
 						/>
 					</div>
 					<div className="form-group">
@@ -67,7 +60,8 @@ export default class App extends React.Component{
 							placeholder="Enter repeat password"
 							ref={node => {(this.repeatPassword = node)}}
 							value={this.state.repeatPassword}
-							onChange={this.onChangeRepeatPassword}
+							name="repeatPassword"
+							onChange={this.onChange}
 						/>
 					</div>
 					<button type="button" className="btn btn-primary w-100" onClick={this.onSubmit}>
