@@ -9,9 +9,10 @@ export default class App extends React.Component{
 			username: "",
 			password: "",
 			repeatPassword: "",
-			country: "3",
+			country: "1",
 			gender: "female",
-			agree: true
+			agree: true,
+			avatar: ""
 		}
 	}
 
@@ -29,6 +30,17 @@ export default class App extends React.Component{
 			//[event.target.name]: event.target.value === "true" ? false : true
 		})
 		//console.log(event.target.name, event.target.value, event.target.checked)
+	};
+
+	onChangeAvatar = event =>{
+		const reader = new FileReader();
+		reader.onload = event =>{
+			this.setState({
+				avatar: event.target.result
+			})
+		}
+		
+		reader.readAsDataURL(event.target.files[0])
 	};
 
 	getOptionsItems = items =>{
@@ -132,6 +144,16 @@ export default class App extends React.Component{
 				        	</label>
 				        </div>
 					</fieldset>
+					<div className="form-group">
+						<label htmlFor="avatar">Avatar</label>
+						<input 
+							type="file"
+							className="form-control-file"
+							id="avatar"
+							name="avatar"
+							onChange={this.onChangeAvatar}
+						/>
+					</div>
 					<div className="form-check">
 					  	<input 
 					  		className="form-check-input" 
