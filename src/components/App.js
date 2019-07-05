@@ -29,7 +29,7 @@ export default class App extends React.Component{
 
 	onSubmit = event =>{
 		event.preventDefault();
-		//console.log(this);
+		// console.log(this);
 		// console.log("refs", this.username.value, this.password.value);
 		console.log("state", this.state);
 	};
