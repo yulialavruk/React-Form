@@ -1,5 +1,6 @@
 import React from 'react';
 import countries from '../data/countries';
+import Field from './Field'
 
 export default class App extends React.Component{
 	constructor(){
@@ -129,64 +130,40 @@ export default class App extends React.Component{
 	};
 
 	render(){
-		console.log(this.state.age);
+		//console.log('age', this.state.age);
 		return(
 			<div className="form-container card">
 				<form className="form card-body">
-					<div className="form-group">
-						<label htmlFor="username">Username</label>
-						<input 
-							type="text"
-							className="form-control"
-							id="username"
-							placeholder="Enter username"
-							ref={node => {(this.username = node)}}
-							value={this.state.username}
-							name="username"
-							onChange={this.onChange}
-						/>
-						{this.state.errors.username ? (
-							<div className="invalid-feedback">
-								{this.state.errors.username}
-							</div>
-						) : null}
-					</div>
-					<div className="form-group">
-						<label htmlFor="password">Password</label>
-						<input 
-							type="text"
-							className="form-control"
-							id="password"
-							placeholder="Enter password"
-							ref={node => {(this.password = node)}}
-							value={this.state.password}
-							name="password"
-							onChange={this.onChange}
-						/>
-						{this.state.errors.password ? (
-							<div className="invalid-feedback">
-								{this.state.errors.password}
-							</div>
-						) : null}
-					</div>
-					<div className="form-group">
-						<label htmlFor="repeatPassword">Repeat password</label>
-						<input 
-							type="text"
-							className="form-control"
-							id="repeatPassword"
-							placeholder="Enter repeat password"
-							ref={node => {(this.repeatPassword = node)}}
-							value={this.state.repeatPassword}
-							name="repeatPassword"
-							onChange={this.onChange}
-						/>
-						{this.state.errors.repeatPassword ? (
-							<div className="invalid-feedback">
-								{this.state.errors.repeatPassword}
-							</div>
-						) : null}
-					</div>
+					<Field 
+						id="username"
+						labelText="Username"
+						type="text"
+						placeholder="Enter username"
+						value={this.state.username}
+						name="username"
+						onChange={this.onChange}
+						error={this.state.errors.username}
+					/>
+					<Field 
+						id="password"
+						labelText="Password"
+						type="password"
+						placeholder="Enter password"
+						value={this.state.password}
+						name="password"
+						onChange={this.onChange}
+						error={this.state.errors.password}
+					/>
+					<Field
+						id="repeatPassword"
+						labelText="Repeat password"
+						type="password"
+						placeholder="Enter repeat password"
+						value={this.state.repeatPassword}
+						name="repeatPassword"
+						onChange={this.onChange}
+						error={this.state.errors.repeatPassword}
+					/>
 					<div className="form-group">
 					    <label htmlFor="country">Country</label>
 					    <select 
