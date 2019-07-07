@@ -13,10 +13,12 @@ export default class App extends React.Component{
 			gender: "female",
 			agree: true,
 			avatar: "",
+			age: 16,
 			errors: {
 				username: false,
 				password: false,
-				repeatPassword: false
+				repeatPassword: false,
+				age: false
 			}
 		}
 	}
@@ -46,6 +48,41 @@ export default class App extends React.Component{
 		}
 
 		reader.readAsDataURL(event.target.files[0])
+	};
+
+	incrementAge = ()=>{
+		this.setState(
+			(prevState, prevProps) => ({
+				age: prevState.age + 1
+			}), 
+			() => {
+				this.setState({
+					errors: { 
+						age: this.state.age > 18? false: 'Must be more 18'
+					}
+				})
+			}
+		) 
+		
+		// this.setState((prevState, prevProps) => ({
+		// 	age: prevState.age + 1
+		// })) 
+		// this.setState((prevState, prevProps) => ({
+		// 	age: prevState.age + 1
+		// })) 
+	};
+
+	decrementAge = ()=>{
+		this.setState({
+			age: this.state.age - 1
+		},
+		() => {
+			this.setState({
+				errors: { 
+					age: this.state.age > 18? false: 'Must be more 18'
+				}
+			})
+		}) 
 	};
 
 	getOptionsItems = items =>{
@@ -92,6 +129,7 @@ export default class App extends React.Component{
 	};
 
 	render(){
+		console.log(this.state.age);
 		return(
 			<div className="form-container card">
 				<form className="form card-body">
@@ -202,6 +240,38 @@ export default class App extends React.Component{
 							onChange={this.onChangeAvatar}
 						/>
 					</div>
+					<div className="form-group">
+			            <div>
+			              	<label>Age</label>
+			            </div>
+			            <div className="btn-group">
+			              	<button
+			                	className="btn btn-secondary"
+			                	type="button"
+			                	onClick={this.decrementAge}
+			              	>
+			                	-
+			              	</button>
+			              	<input
+			                	type="number"
+			                	className="form-control"
+			                	placeholder="Enter age"
+			                	name="age"
+			                	value={this.state.age}
+			                	onChange={this.onChange}
+			              	/>
+			              	<button
+			                	className="btn btn-secondary"
+			                	type="button"
+			                	onClick={this.incrementAge}
+			              	>
+			                	+
+			              	</button>
+			            </div>
+				            {this.state.errors.age ? (
+				              <div className="invalid-feedback">{this.state.errors.age}</div>
+				            ) : null}
+			         </div>
 					<div className="form-check">
 					  	<input 
 					  		className="form-check-input" 
@@ -212,7 +282,7 @@ export default class App extends React.Component{
 					  		checked={this.state.agree}
 					  		onChange={this.onChangeAgree}
 					  	/>
-					  	<label className="form-check-label" htmlFor="agree">Agree</label>
+					  	<label className="form-check-label" htmlFor="agree">Confirm the processing of data</label>
 					</div>
 					<button type="button" className="btn btn-primary w-100" onClick={this.onSubmit}>
 						Submit
